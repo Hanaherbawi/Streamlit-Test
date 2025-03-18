@@ -25,3 +25,4 @@ stream = Stream(
         gr.Slider(minimum=0, maximum=1, step=0.01, value=0.3)
     ]
 )
+stream.ui.launch()
