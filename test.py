@@ -12,7 +12,7 @@ def main():
     st.caption("Powered by OpenCV, Streamlit, and WebRTC")
 
     # Create a WebRTC streamer
-    webrtc_streamer(key="example", video_transformer_factory=VideoTransformer)
+    webrtc_streamer(key="example", video_processor_factory=VideoTransformer)
 
 if __name__ == "__main__":
     main()
