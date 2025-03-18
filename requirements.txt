@@ -1,4 +1,4 @@
-streamlit-webrtc
+fastrtc
 opencv-python-headless
 numpy
 torch
