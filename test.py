@@ -1,18 +1,22 @@
+import cv2
 import streamlit as st
-from streamlit_webrtc import VideoTransformerBase, webrtc_streamer
 
-class VideoTransformer(VideoTransformerBase):
-    def transform(self, frame):
-        # You can add any image processing here if needed
-        return frame  # Return the frame as is for now
+# Initialize the camera
+camera = cv2.VideoCapture(0)
 
-def main():
-    st.set_page_config(page_title="Streamlit WebCam App")
-    st.title("Webcam Display Streamlit App")
-    st.caption("Powered by OpenCV, Streamlit, and WebRTC")
+if not camera.isOpened():
+    st.error("Error: Could not open camera.")
+else:
+    st.success("Camera is working.")
+    ret, frame = camera.read()
+    if ret:
+        # Convert the frame from BGR to RGB
+        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
-    # Create a WebRTC streamer
-    webrtc_streamer(key="example", video_processor_factory=VideoTransformer)
+        # Display the image using Streamlit
+        st.image(frame, channels="RGB", caption="Test Frame")
+    else:
+        st.error("Error: Could not read frame.")
 
-if __name__ == "__main__":
-    main()
+# Release the camera
+camera.release()
